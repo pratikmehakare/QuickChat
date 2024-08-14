@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+const {ConversationModal,MessageModel} = require("../models/conversation.model")
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 
@@ -189,6 +190,86 @@ exports.deleteUser = async (req,res) =>{
       success: false,
       error: err.message
     });
+  }
+}
+
+exports.deleteConversation= async (req,res)=>{
+  try{
+    const id = req.user.id;
+
+    if(!id){
+      return res.status(400).json({
+        message:"Id not found",
+        success:false,
+      })
+    }
+
+    const user = await User.findOne({_id:id});
+
+    if(!user){
+      return res.status(401).json({
+        success:false,
+        message:"User not found"
+      })
+    }
+
+    await ConversationModal.deleteMany({
+      $or: [{ sender: id }, { receiver: id }],
+    }).populate("messages");
+
+    await MessageModel.deleteMany({
+      msgByUserId:id
+    })
+
+    res.status(200).json({
+      success: true,
+      message: "Message Conversation",
+    });
+
+  }catch(err){
+    return res.status(500).json({
+      message:"Internal Error..",
+      error:err.message,
+      success:false
+    })
+  }
+}
+
+exports.deleteMessages= async (req,res)=>{
+  try{
+    const id = req.user.id;
+
+    if(!id){
+      return res.status(400).json({
+        message:"Id not found",
+        success:false,
+      })
+    }
+
+    const user = await User.findOne({_id:id});
+
+    if(!user){
+      return res.status(401).json({
+        success:false,
+        message:"User not found"
+      })
+    }
+
+    await MessageModel.deleteMany({
+      msgByUserId:id
+    })
+
+    res.status(200).json({
+      success: true,
+      message: "Message deleted",
+    });
+
+  }catch(err){
+    return res.status(500).json({
+      message:"Internal Error..",
+      error:err.message,
+      success:false
+    })
   }
 }
 

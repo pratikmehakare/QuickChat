@@ -13,8 +13,8 @@ import Loading from "../components/Spinner";
 import backgroundImage from "../utils/wallapaper.jpeg";
 import { IoMdSend } from "react-icons/io";
 import moment from "moment";
-import EditUserDetails from "./EditUserDetails";
 import chatapp from "../utils/chatapp.png";
+import DeleteMessages from "./Delete";
 
 const MessagePage = () => {
   const params = useParams();
@@ -38,7 +38,7 @@ const MessagePage = () => {
   const [loading, setLoading] = useState(false);
   const [allMessage, setAllMessage] = useState([]);
   const currentMessage = useRef(null);
-  const [editUserOpen, setEditUserOpen] = useState(false);
+  const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
 
   useEffect(() => {
     if (currentMessage.current) {
@@ -118,7 +118,7 @@ const MessagePage = () => {
         setAllMessage(data);
       });
     }
-  }, [socketConnection, params?.userId, user]);
+  }, [socketConnection, params?.userId, user, deleteMsgOpen]);
 
   const handleOnChange = (e) => {
     const { value } = e.target;
@@ -194,7 +194,7 @@ const MessagePage = () => {
         </div>
         <div>
           <button
-            onClick={() => setEditUserOpen(true)}
+            onClick={() => setDeleteMsgOpen(true)}
             className="cursor-pointer hover:text-primary hidden lg:block"
           >
             <HiDotsVertical />
@@ -353,8 +353,14 @@ const MessagePage = () => {
         </form>
       </section>
 
-      {editUserOpen && (
-        <EditUserDetails onClose={() => setEditUserOpen(false)} user={user} />
+      {deleteMsgOpen && (
+        <DeleteMessages
+          title="Delete Messages"
+          description="By proceeding with this action, you will permanently delete all
+            your conversations. Are you sure you wish to continue?"
+          action="deleteMsg"  
+          onClose={() => setDeleteMsgOpen(false)}
+        />
       )}
     </div>
   );

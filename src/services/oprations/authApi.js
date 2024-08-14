@@ -2,7 +2,7 @@ import { authendpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
 import toast from "react-hot-toast";
 
-const { LOGIN_API, SIGNUP_API, GET_USER_API, UPDATE_API, DELETE_API } = authendpoints;
+const { LOGIN_API, SIGNUP_API, GET_USER_API, UPDATE_API,DELETE_MESSGES_API,DELETE_CONVERSATION_API, DELETE_API } = authendpoints;
 
 
 export async function updateUserData(name){
@@ -33,6 +33,64 @@ export async function updateUserData(name){
       console.log("Unauthorized error: Possibly invalid or expired token");
     }
     toast.error("Can't Update");
+  }
+}
+
+export async function deleteConversation(){
+  try{
+    const token = JSON.parse(localStorage.getItem("token"));
+    
+    if (!token) {
+      throw new Error("No token found");
+    }
+
+    const res = await apiConnector("DELETE", DELETE_CONVERSATION_API, null, {
+      Authorization: `Bearer ${token}`,
+    })
+
+    if (res.status === 200) {
+      
+      console.log("dlete conversation");
+    
+    } else {
+      throw new Error(`delete failed with status: ${res.status}`);
+    }
+
+  }catch (err) {
+    console.log("DELETE Conversation API ERROR....", err);
+    if (err.response && err.response.status === 401) {
+      console.log("Unauthorized error: Possibly invalid or expired token");
+    }
+    toast.error("Can't Fetch");
+  }
+}
+
+export async function deleteMessages(){
+  try{
+    const token = JSON.parse(localStorage.getItem("token"));
+    
+    if (!token) {
+      throw new Error("No token found");
+    }
+
+    const res = await apiConnector("DELETE", DELETE_MESSGES_API, null, {
+      Authorization: `Bearer ${token}`,
+    })
+
+    if (res.status === 200) {
+     
+      console.log("Message deleted")
+    
+    } else {
+      throw new Error(`delete failed with status: ${res.status}`);
+    }
+
+  }catch (err) {
+    console.log("DELETE MESSAGE API ERROR....", err);
+    if (err.response && err.response.status === 401) {
+      console.log("Unauthorized error: Possibly invalid or expired token");
+    }
+    toast.error("Can't Fetch");
   }
 }
 

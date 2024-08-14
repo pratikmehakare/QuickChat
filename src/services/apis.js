@@ -5,5 +5,8 @@ export const authendpoints = {
     SIGNUP_API :BASE_URL + "/api/v1/signup",
     UPDATE_API :BASE_URL + "/api/v1/updateUsersDetails",
     DELETE_API :BASE_URL + "/api/v1/deleteUser",
-    GET_USER_API :BASE_URL + "/api/v1/getUsersDetails"
+    GET_USER_API :BASE_URL + "/api/v1/getUsersDetails",
+    DELETE_MESSGES_API :BASE_URL + "/api/v1/deleteMessages",
+    DELETE_CONVERSATION_API :BASE_URL + "/api/v1/deleteConversation"
+                                 
 }
