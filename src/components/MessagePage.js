@@ -161,7 +161,7 @@ const MessagePage = () => {
     >
       <header className="sticky top-0 h-16 bg-white flex justify-between items-center px-4">
         <div className="flex items-center gap-4">
-          <Link to={"/"} className="lg:hidden">
+          <Link to={"/home"} className="lg:hidden">
             <FaAngleLeft size={25} />
           </Link>
           <div>
