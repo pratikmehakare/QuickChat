@@ -14,6 +14,7 @@ import { logout } from "../redux/userSlice";
 import toast from "react-hot-toast";
 import { HiDotsVertical } from "react-icons/hi";
 import DeleteMessages from "./Delete";
+import chatapp from "../utils/chatapp.png";
 
 const Sidebar = () => {
   const user = useSelector((state) => state?.user);
@@ -58,7 +59,7 @@ const Sidebar = () => {
         setAllUser(conversationUserData);
       });
     }
-  }, [socketConnection, user,deleteConvOpen]);
+  }, [socketConnection, user, deleteConvOpen]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -120,6 +121,14 @@ const Sidebar = () => {
       <div className="w-full">
         <div className="h-16 flex items-center justify-between">
           <h2 className="text-xl font-bold p-4 text-slate-800">Message</h2>
+
+          <div className="flex mr-14 lg:hidden">
+            <img src={chatapp} width={40} height={40} alt="logo" />
+            <h3 className="flex justify-center items-center text-xl font-semibold">
+              QuickChat
+            </h3>
+          </div>
+
           <div className=" ">
             <button
               onClick={() => setDeleteConvOpen(true)}
