@@ -186,11 +186,9 @@ const MessagePage = () => {
           </div>
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="hidden lg:flex justify-center items-center">
           <img src={chatapp} width={40} height={40} alt="logo" />
-          <h3 className="flex justify-center items-center text-xl lg:text-4xl font-semibold">
-            QuickChat
-          </h3>
+          <h3 className="text-xl lg:text-4xl font-semibold">QuickChat</h3>
         </div>
 
         <div>
@@ -359,7 +357,7 @@ const MessagePage = () => {
           title="Delete Messages"
           description="By proceeding with this action, you will permanently delete all
             your conversations. Are you sure you wish to continue?"
-          action="deleteMsg"  
+          action="deleteMsg"
           onClose={() => setDeleteMsgOpen(false)}
         />
       )}
