@@ -206,8 +206,8 @@ const Sidebar = () => {
       )}
       {deleteConvOpen && (
         <DeleteMessages
-          title="Delete Conversation"
-          description="Proceeding with this action will permanently delete this conversation and all associated messages for everyone involved. Are you sure you want to continue?"
+          title="Delete All Conversations"
+          description="Proceeding with this action will permanently delete all conversations and all associated messages for everyone involved. Are you sure you want to continue?"
           action="deleteConv"
           onClose={() => setDeleteConvOpen(false)}
         />

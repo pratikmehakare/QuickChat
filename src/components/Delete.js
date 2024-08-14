@@ -1,21 +1,16 @@
 import React from "react";
-import toast from "react-hot-toast";
 import { deleteConversation, deleteMessages } from "../services/oprations/authApi";
 
 
 const DeleteMessages = ({  onClose, title,description, action }) => {
 
     const handleDeleteMsg = async () => {
-       if(await deleteMessages()) 
-        {
-          toast.success("Message Deleted..");
-        }
+        await deleteMessages()
         onClose(); 
     };
 
     const handleDeleteConv = async () =>{
-        if(await deleteConversation())
-        {toast.success("Conversation Deleted..");}
+        await deleteConversation()
         onClose(); 
     }
   

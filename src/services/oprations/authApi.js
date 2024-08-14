@@ -48,9 +48,8 @@ export async function deleteConversation(){
       Authorization: `Bearer ${token}`,
     })
 
-    if (res.status === 200) {
-      
-      console.log("dlete conversation");
+    if (res) {
+      toast.success("Conversations Deleted.");
     
     } else {
       throw new Error(`delete failed with status: ${res.status}`);
@@ -78,9 +77,7 @@ export async function deleteMessages(){
     })
 
     if (res.status === 200) {
-     
-      console.log("Message deleted")
-    
+       toast.success("Messges Deleted")   
     } else {
       throw new Error(`delete failed with status: ${res.status}`);
     }

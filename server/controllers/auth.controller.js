@@ -192,48 +192,60 @@ exports.deleteUser = async (req,res) =>{
     });
   }
 }
-
-exports.deleteConversation= async (req,res)=>{
-  try{
+exports.deleteConversation = async (req, res) => {
+  try {
     const id = req.user.id;
 
-    if(!id){
+    if (!id) {
       return res.status(400).json({
-        message:"Id not found",
-        success:false,
-      })
+        message: "Id not found",
+        success: false,
+      });
     }
 
-    const user = await User.findOne({_id:id});
+    const user = await User.findOne({ _id: id });
 
-    if(!user){
+    if (!user) {
       return res.status(401).json({
-        success:false,
-        message:"User not found"
-      })
+        success: false,
+        message: "User not found",
+      });
     }
 
-    await ConversationModal.deleteMany({
+    // Find the conversations where the user is either sender or receiver
+    const conversations = await ConversationModal.find({
       $or: [{ sender: id }, { receiver: id }],
-    }).populate("messages");
+    });
 
+    // Extract the message IDs from those conversations
+    const messageIds = conversations.reduce((acc, conversation) => {
+      return acc.concat(conversation.messages);
+    }, []);
+
+    // Delete all the conversations
+    await ConversationModal.deleteMany({
+      _id: { $in: conversations.map(conversation => conversation._id) }
+    });
+
+    // Delete all messages related to those conversations
     await MessageModel.deleteMany({
-      msgByUserId:id
-    })
+      _id: { $in: messageIds }
+    });
 
     res.status(200).json({
       success: true,
-      message: "Message Conversation",
+      message: "Conversations and related messages deleted successfully",
     });
 
-  }catch(err){
+  } catch (err) {
     return res.status(500).json({
-      message:"Internal Error..",
-      error:err.message,
-      success:false
-    })
+      message: "Internal Error..",
+      error: err.message,
+      success: false,
+    });
   }
 }
+
 
 exports.deleteMessages= async (req,res)=>{
   try{
