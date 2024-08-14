@@ -188,14 +188,15 @@ const MessagePage = () => {
 
         <div className="flex justify-center items-center">
           <img src={chatapp} width={40} height={40} alt="logo" />
-          <h3 className="flex justify-center items-center text-4xl font-semibold">
+          <h3 className="flex justify-center items-center text-xl lg:text-4xl font-semibold">
             QuickChat
           </h3>
         </div>
+
         <div>
           <button
             onClick={() => setDeleteMsgOpen(true)}
-            className="cursor-pointer hover:text-primary hidden lg:block"
+            className="cursor-pointer hover:text-primary"
           >
             <HiDotsVertical />
           </button>

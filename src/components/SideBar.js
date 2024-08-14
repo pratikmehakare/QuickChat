@@ -118,12 +118,12 @@ const Sidebar = () => {
       </div>
 
       <div className="w-full">
-        <div className="h-16 flex items-center">
+        <div className="h-16 flex items-center justify-between">
           <h2 className="text-xl font-bold p-4 text-slate-800">Message</h2>
-          <div className="ml-4">
+          <div className=" ">
             <button
               onClick={() => setDeleteConvOpen(true)}
-              className="cursor-pointer hover:text-primary flex ml-20 "
+              className="cursor-pointer hover:text-primary flex mr-2 "
             >
               <HiDotsVertical />
             </button>
