@@ -75,19 +75,18 @@ const Home = () => {
       </section>
 
       {basePath && (
-  <div className="lg:flex justify-center items-center flex-col gap-2 hidden sm:hidden">
-    <div>
-      <img src={logo} width={150} alt="logo" />
-      <h3 className="flex justify-center items-center text-4xl font-semibold">
-        QuickChat
-      </h3>
-    </div>
-    <p className="text-lg mt-2 text-slate-500">
-      Select User to send message
-    </p>
-  </div>
-)}
-
+        <div className="lg:flex justify-center items-center flex-col gap-2 hidden sm:hidden">
+          <div>
+            <img src={logo} width={150} alt="logo" />
+            <h3 className="flex justify-center items-center text-4xl font-semibold">
+              QuickChat
+            </h3>
+          </div>
+          <p className="text-lg mt-2 text-slate-500">
+            Select User to send message
+          </p>
+        </div>
+      )}
     </div>
   );
 };
