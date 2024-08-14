@@ -8,19 +8,22 @@ import MessagePage from "./components/MessagePage";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  const user = useSelector((state)=>state.user);
+  const user = useSelector((state) => state.user);
   const isLoggedIn = localStorage.getItem("token") || user.token;
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
+      <Route
+        path="/"
+        element={isLoggedIn ? <Navigate to="/home" replace /> : <Login />}
+      />
       <Route path="/signup" element={<SignUp />} />
       {isLoggedIn ? (
         <Route path="/home" element={<Home />}>
           <Route path=":userId" element={<MessagePage />} />
         </Route>
-      ):(<Route path="*" element={<Navigate to="/" replace />} />)
-      }
-
+      ) : (
+        <Route path="*" element={<Navigate to="/" replace />} />
+      )}
     </Routes>
   );
 };
