@@ -6,14 +6,16 @@ import { deleteConversation, deleteMessages } from "../services/oprations/authAp
 const DeleteMessages = ({  onClose, title,description, action }) => {
 
     const handleDeleteMsg = async () => {
-        await deleteMessages();
-        toast.success("Message Deleted..");
+       if(await deleteMessages()) 
+        {
+          toast.success("Message Deleted..");
+        }
         onClose(); 
     };
 
     const handleDeleteConv = async () =>{
-        await deleteConversation();
-        toast.success("Conversation Deleted..");
+        if(await deleteConversation())
+        {toast.success("Conversation Deleted..");}
         onClose(); 
     }
   
