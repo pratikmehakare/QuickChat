@@ -50,7 +50,7 @@ export async function getUser() {
 
     if (res.status === 200) {
       console.log("GET USER API RESPONSE..", res);
-      toast.success("Fetch Success");
+      // toast.success("Fetch Success");
       return res.data;
     } else {
       throw new Error(`Fetch failed with status: ${res.status}`);
