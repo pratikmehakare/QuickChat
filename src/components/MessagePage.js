@@ -192,11 +192,10 @@ const MessagePage = () => {
             QuickChat
           </h3>
         </div>
-
         <div>
           <button
             onClick={() => setEditUserOpen(true)}
-            className="cursor-pointer hover:text-primary"
+            className="cursor-pointer hover:text-primary hidden lg:block"
           >
             <HiDotsVertical />
           </button>
